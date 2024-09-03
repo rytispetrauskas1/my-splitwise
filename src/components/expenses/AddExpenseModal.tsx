@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./AddExpenseModal.css";
 import { useGlobalState } from "../../context/globalState";
+import { getMaxValue } from "../../utils/listUtils";
 
 interface AddExpenseModalProps {
   show: boolean;
@@ -9,15 +10,26 @@ interface AddExpenseModalProps {
 
 const AddExpenseModal: React.FC<AddExpenseModalProps> = ({ show, onClose }) => {
   const { state, dispatch } = useGlobalState();
-  const { groups, categories } = state;
+  const { expenses, groups, categories } = state;
 
   const [expenseType, setExpenseType] = useState<string>("");
   const [description, setDescription] = useState<string>("");
   const [amount, setAmount] = useState<number | string>("");
   const [groupId, setGroupId] = useState<number | string>("");
 
-  const addExpense = () => {
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!expenseType || !description || !amount || !groupId) {
+      alert("Please fill in all fields.");
+      return;
+    }
+    const expenseMap = expenses.map((item) => {
+      return {
+        id: item.id,
+      };
+    });
     const newExpense = {
+      id: getMaxValue(expenseMap),
       type: expenseType,
       description,
       amount: Number(amount),
@@ -28,21 +40,12 @@ const AddExpenseModal: React.FC<AddExpenseModalProps> = ({ show, onClose }) => {
     // Add new expense to the global state
     dispatch({ type: "ADD_EXPENSE", payload: newExpense });
 
-    //Clean up local state
+    // Clean up local state
     setExpenseType("");
     setDescription("");
     setAmount("");
+    setGroupId("");
     onClose();
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!expenseType || !description || !amount || !groupId) {
-      alert("Please fill in all fields.");
-      return;
-    }
-
-    addExpense();
   };
 
   if (!show) {

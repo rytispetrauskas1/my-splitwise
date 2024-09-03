@@ -4,18 +4,6 @@
     padding: 20px;
 }
 
-.expense-list {
-    margin-top: 20px;
-}
-
-.expense-item {
-    padding: 15px;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    background-color: #f9f9f9;
-    margin-bottom: 10px;
-}
-
 .back-btn {
     display: inline-block;
     margin-top: 20px;

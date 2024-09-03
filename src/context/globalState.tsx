@@ -24,10 +24,8 @@ type GlobalState = {
 type Action =
   | { type: "ADD_GROUP"; payload: Group }
   | { type: "ADD_EXPENSE"; payload: Expense }
-  | { type: "ADD_CATEGORY"; payload: Category }
-  | { type: "SET_GROUPS"; payload: Group[] }
-  | { type: "SET_CATEGORIES"; payload: Category[] }
-  | { type: "SET_EXPENSES"; payload: Expense[] };
+  | { type: "UPDATE_EXPENSE"; payload: Expense }
+  | { type: "ADD_CATEGORY"; payload: Category };
 
 const loadStateFromLocalStorage = (): GlobalState => {
   const storedGroups = localStorage.getItem("groups");
@@ -59,14 +57,15 @@ const globalReducer = (state: GlobalState, action: Action): GlobalState => {
       return { ...state, groups: [...state.groups, action.payload] };
     case "ADD_EXPENSE":
       return { ...state, expenses: [...state.expenses, action.payload] };
+    case "UPDATE_EXPENSE":
+      return {
+        ...state,
+        expenses: state.expenses.map((expense) =>
+          expense.id === action.payload.id ? action.payload : expense
+        ),
+      };
     case "ADD_CATEGORY":
       return { ...state, categories: [...state.categories, action.payload] };
-    case "SET_GROUPS":
-      return { ...state, groups: action.payload };
-    case "SET_EXPENSES":
-      return { ...state, expenses: action.payload };
-    case "SET_CATEGORIES":
-      return { ...state, categories: action.payload };
     default:
       return state;
   }
