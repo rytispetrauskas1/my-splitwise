@@ -7,10 +7,12 @@ interface ExpenseGroupListProps {}
 
 const ExpenseGroupList: React.FC<ExpenseGroupListProps> = () => {
   const { groups, expenses } = useGlobalState().state;
-  const totalAmount = expenses.reduce(
-    (expenseSum, expense) => expenseSum + expense.amount,
-    0
-  );
+  const getTotalAmount = (groupId: number) =>
+    expenses.reduce(
+      (expenseSum, expense) =>
+        expense.groupId === groupId ? expenseSum + expense.amount : expenseSum,
+      0
+    );
 
   return (
     <div className="group-expense-list">
@@ -23,7 +25,7 @@ const ExpenseGroupList: React.FC<ExpenseGroupListProps> = () => {
             className="group-expense-item"
           >
             <h2>{group.name}</h2>
-            <h3>Total expenses: {totalAmount}</h3>
+            <h3>Total expenses: €{getTotalAmount(group.id)}</h3>
           </Link>
         ))
       ) : (
