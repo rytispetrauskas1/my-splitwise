@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./AddExpenseGroupModal.css";
 import { useGlobalState } from "../../context/globalState";
+import { getMaxValue } from "../../utils/listUtils";
 
 interface AddExpenseGroupModalProps {
   show: boolean;
@@ -14,34 +15,31 @@ const AddExpenseGroupModal: React.FC<AddExpenseGroupModalProps> = ({
   const { state, dispatch } = useGlobalState();
   const { groups } = state;
 
-  const [groupID, setGroupID] = useState<number | string>("");
   const [groupName, setGroupName] = useState<string>("");
 
-  const addGroup = () => {
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (!groupName) {
+      alert("Please fill in all fields.");
+      return;
+    }
+
+    const groupMap = groups.map((item) => {
+      return {
+        id: item.id,
+      };
+    });
+
     const newGroup = {
-      id: Number(groupID),
+      id: getMaxValue(groupMap),
       name: groupName.trim(),
       timestamp: new Date().toISOString(),
     };
     dispatch({ type: "ADD_GROUP", payload: newGroup });
 
     setGroupName("");
-    setGroupID("");
     onClose();
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-
-    if (!groupName || !groupID) {
-      alert("Please fill in all fields.");
-      return;
-    }
-    if (groups.some((item) => item.id === Number(groupID))) {
-      alert("Group id already exits");
-      return;
-    }
-    addGroup();
   };
 
   if (!show) {
@@ -49,21 +47,10 @@ const AddExpenseGroupModal: React.FC<AddExpenseGroupModalProps> = ({
   }
 
   return (
-    <div className="modal-overlay">
-      <div className="modal-content">
+    <div className="group-modal-overlay">
+      <div className="group-modal-content">
         <h2>Add New Group</h2>
         <form onSubmit={handleSubmit} className="group-form">
-          <div className="form-group">
-            <label htmlFor="groupID">Group ID</label>
-            <input
-              type="number"
-              id="groupID"
-              value={groupID}
-              onChange={(e) => setGroupID(e.target.value)}
-              placeholder="Enter group id"
-              required
-            />
-          </div>
           <div className="form-group">
             <label htmlFor="groupName">Group Name</label>
             <input
@@ -75,11 +62,15 @@ const AddExpenseGroupModal: React.FC<AddExpenseGroupModalProps> = ({
               required
             />
           </div>
-          <div className="form-buttons">
-            <button type="submit" className="submit-btn">
+          <div className="group-form-buttons">
+            <button type="submit" className="group-submit-btn">
               Add Group
             </button>
-            <button type="button" className="cancel-btn" onClick={onClose}>
+            <button
+              type="button"
+              className="group-cancel-btn"
+              onClick={onClose}
+            >
               Cancel
             </button>
           </div>

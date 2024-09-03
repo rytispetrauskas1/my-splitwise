@@ -1,4 +1,4 @@
-.modal-overlay {
+.group-modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -10,7 +10,7 @@
   align-items: center;
 }
 
-.modal-content {
+.group-modal-content {
   background-color: white;
   padding: 20px;
   border-radius: 10px;
@@ -40,13 +40,13 @@
   width: 100%;
 }
 
-.form-buttons {
+.group-form-buttons {
   display: flex;
   justify-content: space-between;
   margin-top: 15px;
 }
 
-.submit-btn {
+.group-submit-btn {
   background-color: #4CAF50;
   color: white;
   padding: 10px;
@@ -56,11 +56,11 @@
   cursor: pointer;
 }
 
-.submit-btn:hover {
+.group-submit-btn:hover {
   background-color: #45a049;
 }
 
-.cancel-btn {
+.group-cancel-btn {
   background-color: #f44336;
   color: white;
   padding: 10px;
@@ -70,6 +70,6 @@
   cursor: pointer;
 }
 
-.cancel-btn:hover {
+.group-cancel-btn:hover {
   background-color: #d32f2f;
 }
