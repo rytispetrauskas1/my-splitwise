@@ -4,6 +4,7 @@ import "./HomePage.css";
 import ExpenseGroupList from "../components/expenseGroups/ExpenseGroupList";
 import AddExpenseGroupModal from "../components/expenseGroups/AddExpenseGroupModal";
 import AddExpenseModal from "../components/expenses/AddExpenseModal";
+import AddExpenseButton from "../components/expenses/AddExpenseButton";
 
 interface HomePageProps {}
 
@@ -40,13 +41,8 @@ const HomePage: React.FC<HomePageProps> = () => {
         show={showAddExpenseModal}
         onClose={() => setShowAddExpenseModal(false)}
       />
+      <AddExpenseButton onClick={() => setShowAddExpenseModal(true)} />
       <ExpenseGroupList />
-      <button
-        className="floating-add-expense-btn"
-        onClick={() => setShowAddExpenseModal(true)}
-      >
-        +Add Expense
-      </button>
     </div>
   );
 };

@@ -18,3 +18,10 @@ export type Category = {
   name: string;
   timestamp: string;
 };
+
+// src/types/User.ts
+
+export type User = {
+  id: number;
+  username: string;
+};

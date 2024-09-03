@@ -6,16 +6,21 @@ import { getMaxValue } from "../../utils/listUtils";
 interface AddExpenseModalProps {
   show: boolean;
   onClose: () => void;
+  currentGroupId?: number | string;
 }
 
-const AddExpenseModal: React.FC<AddExpenseModalProps> = ({ show, onClose }) => {
+const AddExpenseModal: React.FC<AddExpenseModalProps> = ({
+  show,
+  onClose,
+  currentGroupId = "",
+}) => {
   const { state, dispatch } = useGlobalState();
   const { expenses, groups, categories } = state;
 
   const [expenseType, setExpenseType] = useState<string>("");
   const [description, setDescription] = useState<string>("");
   const [amount, setAmount] = useState<number | string>("");
-  const [groupId, setGroupId] = useState<number | string>("");
+  const [groupId, setGroupId] = useState<number | string>(currentGroupId);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
