@@ -1,12 +1,13 @@
 // src/pages/SummaryPage.tsx
 import React from "react";
 import "./SummaryPage.css";
+import { useGlobalState } from "../context/globalState";
 
-interface SummaryPageProps {
-  expenses: { type: string; description: string; amount: number }[];
-}
+interface SummaryPageProps {}
 
-const SummaryPage: React.FC<SummaryPageProps> = ({ expenses }) => {
+const SummaryPage: React.FC<SummaryPageProps> = () => {
+  const { state } = useGlobalState();
+  const { expenses } = state;
   const totalAmount = expenses.reduce(
     (acc, expense) => acc + expense.amount,
     0

@@ -1,4 +1,4 @@
-.modal-overlay {
+.expense-modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -10,12 +10,11 @@
   align-items: center;
 }
 
-.modal-content {
+.expense-modal-content {
   background-color: white;
   padding: 20px;
   border-radius: 10px;
-  width: 90%;
-  max-width: 500px;
+  width: 30%;
 }
 
 .expense-form {
@@ -23,59 +22,33 @@
   flex-direction: column;
 }
 
-.form-group {
+.expense-form-group {
   margin-bottom: 15px;
+  display: flex;
+  flex-direction: column;
 }
 
-.form-group label {
+.expense-form-group label {
   font-weight: bold;
   margin-bottom: 5px;
 }
 
-.form-group input,
-.form-group select {
+.expense-form-group input,
+.expense-form-group select
+{
   padding: 8px;
   font-size: 16px;
   border-radius: 5px;
   border: 1px solid #ccc;
-  width: 100%;
 }
 
-.add-category {
-  display: flex;
-  margin-top: 10px;
-}
-
-.add-category input {
-  flex: 1;
-  padding: 8px;
-  font-size: 16px;
-  border-radius: 5px 0 0 5px;
-  border: 1px solid #ccc;
-  border-right: none;
-}
-
-.add-category button {
-  padding: 8px 16px;
-  font-size: 16px;
-  border-radius: 0 5px 5px 0;
-  border: 1px solid #ccc;
-  background-color: #4CAF50;
-  color: white;
-  cursor: pointer;
-}
-
-.add-category button:hover {
-  background-color: #45a049;
-}
-
-.form-buttons {
+.expense-form-buttons {
   display: flex;
   justify-content: space-between;
   margin-top: 15px;
 }
 
-.submit-btn {
+.expense-submit-btn {
   background-color: #4CAF50;
   color: white;
   padding: 10px;
@@ -86,11 +59,11 @@
   margin-top: 10px;
 }
 
-.submit-btn:hover {
+.expense-submit-btn:hover {
   background-color: #45a049;
 }
 
-.cancel-btn {
+.expense-cancel-btn {
   background-color: #f44336;
   color: white;
   padding: 10px;
@@ -101,6 +74,6 @@
   margin-top: 10px;
 }
 
-.cancel-btn:hover {
+.expense-cancel-btn:hover {
   background-color: #d32f2f;
 }

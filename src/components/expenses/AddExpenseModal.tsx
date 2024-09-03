@@ -1,54 +1,48 @@
 import React, { useState } from "react";
 import "./AddExpenseModal.css";
-import { Expense } from "../types";
+import { useGlobalState } from "../../context/globalState";
 
 interface AddExpenseModalProps {
   show: boolean;
   onClose: () => void;
-  addExpense: (expense: Expense) => void;
-  categories: string[];
-  addCategory: (category: string) => void;
 }
 
-const AddExpenseModal: React.FC<AddExpenseModalProps> = ({
-  show,
-  onClose,
-  addExpense,
-  categories,
-  addCategory,
-}) => {
+const AddExpenseModal: React.FC<AddExpenseModalProps> = ({ show, onClose }) => {
+  const { state, dispatch } = useGlobalState();
+  const { groups, categories } = state;
+
   const [expenseType, setExpenseType] = useState<string>("");
   const [description, setDescription] = useState<string>("");
   const [amount, setAmount] = useState<number | string>("");
-  const [newCategory, setNewCategory] = useState<string>("");
+  const [groupId, setGroupId] = useState<string>("");
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!expenseType || !description || !amount) {
-      alert("Please fill in all fields.");
-      return;
-    }
-
+  const addExpense = () => {
     const newExpense = {
       type: expenseType,
       description,
       amount: Number(amount),
       timestamp: new Date().toISOString(),
+      groupId,
     };
 
-    addExpense(newExpense);
+    // Add new expense to the global state
+    dispatch({ type: "ADD_EXPENSE", payload: newExpense });
+
+    //Clean up local state
     setExpenseType("");
     setDescription("");
     setAmount("");
     onClose();
   };
 
-  const handleAddCategory = () => {
-    if (newCategory && !categories.includes(newCategory)) {
-      addCategory(newCategory);
-      setExpenseType(newCategory);
-      setNewCategory("");
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!expenseType || !description || !amount || !groupId) {
+      alert("Please fill in all fields.");
+      return;
     }
+
+    addExpense();
   };
 
   if (!show) {
@@ -56,11 +50,11 @@ const AddExpenseModal: React.FC<AddExpenseModalProps> = ({
   }
 
   return (
-    <div className="modal-overlay">
-      <div className="modal-content">
+    <div className="expense-modal-overlay">
+      <div className="expense-modal-content">
         <h2>Add New Expense</h2>
         <form onSubmit={handleSubmit} className="expense-form">
-          <div className="form-group">
+          <div className="expense-form-group">
             <label htmlFor="expenseType">Expense Type</label>
             <select
               id="expenseType"
@@ -69,25 +63,14 @@ const AddExpenseModal: React.FC<AddExpenseModalProps> = ({
               required
             >
               <option value="">Select type</option>
-              {categories.map((category, index) => (
-                <option key={index} value={category}>
-                  {category}
+              {categories.map((category) => (
+                <option key={category.id} value={category.name}>
+                  {category.name}
                 </option>
               ))}
             </select>
-            <div className="add-category">
-              <input
-                type="text"
-                value={newCategory}
-                onChange={(e) => setNewCategory(e.target.value)}
-                placeholder="New category"
-              />
-              <button type="button" onClick={handleAddCategory}>
-                Add
-              </button>
-            </div>
           </div>
-          <div className="form-group">
+          <div className="expense-form-group">
             <label htmlFor="description">Description</label>
             <input
               type="text"
@@ -98,7 +81,7 @@ const AddExpenseModal: React.FC<AddExpenseModalProps> = ({
               required
             />
           </div>
-          <div className="form-group">
+          <div className="expense-form-group">
             <label htmlFor="amount">Amount</label>
             <input
               type="number"
@@ -109,11 +92,31 @@ const AddExpenseModal: React.FC<AddExpenseModalProps> = ({
               required
             />
           </div>
-          <div className="form-buttons">
-            <button type="submit" className="submit-btn">
+          <div className="expense-form-group">
+            <label htmlFor="group">Group</label>
+            <select
+              id="group"
+              value={groupId}
+              onChange={(e) => setGroupId(e.target.value)}
+              required
+            >
+              <option value="">Select group</option>
+              {groups.map((group) => (
+                <option key={group.id} value={group.id}>
+                  {group.name}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="expense-form-buttons">
+            <button type="submit" className="expense-submit-btn">
               Add Expense
             </button>
-            <button type="button" className="cancel-btn" onClick={onClose}>
+            <button
+              type="button"
+              className="expense-cancel-btn"
+              onClick={onClose}
+            >
               Cancel
             </button>
           </div>
