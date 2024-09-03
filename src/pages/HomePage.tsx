@@ -4,7 +4,7 @@ import "./HomePage.css";
 import ExpenseGroupList from "../components/expenseGroups/ExpenseGroupList";
 import AddExpenseGroupModal from "../components/expenseGroups/AddExpenseGroupModal";
 import AddExpenseModal from "../components/expenses/AddExpenseModal";
-import AddExpenseButton from "../components/expenses/AddExpenseButton";
+import AddExpenseButton from "../components/common/AddExpenseButton";
 
 interface HomePageProps {}
 

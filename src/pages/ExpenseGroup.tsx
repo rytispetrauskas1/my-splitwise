@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import "./ExpenseGroup.css";
 import ExpenseList from "../components/expenses/ExpenseList";
-import AddExpenseButton from "../components/expenses/AddExpenseButton";
+import AddExpenseButton from "../components/common/AddExpenseButton";
 import AddExpenseModal from "../components/expenses/AddExpenseModal";
 
 const GroupExpenses: React.FC = () => {
