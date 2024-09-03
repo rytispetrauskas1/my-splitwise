@@ -1,10 +1,4 @@
-import React, {
-  createContext,
-  useReducer,
-  useContext,
-  ReactNode,
-  useEffect,
-} from "react";
+import React, { createContext, useReducer, useContext, ReactNode } from "react";
 import { Category, Expense, Group, User } from "../types";
 
 const defaultCategories = [

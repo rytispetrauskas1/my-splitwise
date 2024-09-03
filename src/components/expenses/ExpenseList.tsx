@@ -1,6 +1,7 @@
 import React from "react";
 import "./ExpenseList.css";
 import { Expense } from "../../types";
+import EditIcon from "../../assets/icons/edit.svg";
 
 interface ExpenseListProps {
   expenses: Expense[];
@@ -18,6 +19,7 @@ const ExpenseList: React.FC<ExpenseListProps> = ({ expenses }) => {
             <strong>Date Added:</strong>{" "}
             {new Date(expense.timestamp).toLocaleString()}{" "}
           </div>
+          <img src={EditIcon} alt="Edit icon" className="edit-icon" />
         </div>
       ))}
     </div>

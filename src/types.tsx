@@ -5,6 +5,7 @@ export type Expense = {
   amount: number;
   timestamp: string;
   groupId: number;
+  userId: number;
 };
 
 export type Group = {

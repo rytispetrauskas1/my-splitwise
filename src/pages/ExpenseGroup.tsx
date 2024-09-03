@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useGlobalState } from "../context/globalState";
 import { useParams } from "react-router-dom";
-import { Link } from "react-router-dom";
 import "./ExpenseGroup.css";
 import ExpenseList from "../components/expenses/ExpenseList";
 import AddExpenseButton from "../components/common/AddExpenseButton";
@@ -30,9 +29,6 @@ const GroupExpenses: React.FC = () => {
     <div className="group-expenses">
       <h1>Expenses for {group.name}</h1>
       <ExpenseList expenses={groupExpenses} />
-      <Link to="/" className="back-btn">
-        Back to Groups
-      </Link>
       <AddExpenseModal
         show={showAddExpenseModal}
         onClose={() => setShowAddExpenseModal(false)}

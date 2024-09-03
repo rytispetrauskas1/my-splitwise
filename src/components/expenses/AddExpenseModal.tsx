@@ -15,7 +15,7 @@ const AddExpenseModal: React.FC<AddExpenseModalProps> = ({
   currentGroupId = "",
 }) => {
   const { state, dispatch } = useGlobalState();
-  const { expenses, groups, categories } = state;
+  const { expenses, groups, categories, currentUser } = state;
 
   const [expenseType, setExpenseType] = useState<string>("");
   const [description, setDescription] = useState<string>("");
@@ -24,15 +24,15 @@ const AddExpenseModal: React.FC<AddExpenseModalProps> = ({
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!expenseType || !description || !amount || !groupId) {
-      alert("Please fill in all fields.");
-      return;
-    }
+
+    // Create expense Id map
     const expenseMap = expenses.map((item) => {
       return {
         id: item.id,
       };
     });
+
+    // Create a new expense object
     const newExpense = {
       id: getMaxValue(expenseMap),
       type: expenseType,
@@ -40,6 +40,7 @@ const AddExpenseModal: React.FC<AddExpenseModalProps> = ({
       amount: Number(amount),
       timestamp: new Date().toISOString(),
       groupId: Number(groupId),
+      userId: currentUser ? currentUser.id : 0,
     };
 
     // Add new expense to the global state

@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import "./LoginPage.css";
-import { setCurrentUser, useGlobalState } from "../context/globalState";
+import { useGlobalState } from "../context/globalState";
 
 const defaultUsers = [
   {

@@ -1,6 +1,9 @@
-.expenses-list {
+.expense-list {
     margin-top: 20px;
-    text-align: left;
+    text-align: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
   }
   
   .expenses-list h2 {
@@ -8,11 +11,14 @@
   }
   
   .expense-item {
-    background-color: #f9f9f9;
+    background-color: hsl(0, 0%, 98%);
     padding: 15px;
     margin-bottom: 15px;
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    justify-content: space-between; /* Pushes the edit button to the right */
+    display: flex;
+    width: 60%;
   }
   
   .expense-item h3 {
@@ -24,3 +30,14 @@
     margin: 5px 0;
   }
   
+  .edit-icon {
+    background-color: rgba(0, 0, 0, 0.1);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .edit-icon:hover {
+    background-color: #0d7a55;
+}
