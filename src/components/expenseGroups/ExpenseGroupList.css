@@ -16,6 +16,10 @@
   align-items: center;
   width: 80%;
   margin-bottom: 24px;
+  
+  /* Remove default Link text decorations  */
+  text-decoration: none;
+  color: inherit;
 }
 
 .group-expense-item:hover {

@@ -3,6 +3,7 @@ export type Expense = {
   description: string;
   amount: number;
   timestamp: string;
+  groupId: number;
 };
 
 export type Group = {

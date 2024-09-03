@@ -14,7 +14,7 @@ const AddExpenseModal: React.FC<AddExpenseModalProps> = ({ show, onClose }) => {
   const [expenseType, setExpenseType] = useState<string>("");
   const [description, setDescription] = useState<string>("");
   const [amount, setAmount] = useState<number | string>("");
-  const [groupId, setGroupId] = useState<string>("");
+  const [groupId, setGroupId] = useState<number | string>("");
 
   const addExpense = () => {
     const newExpense = {
@@ -22,7 +22,7 @@ const AddExpenseModal: React.FC<AddExpenseModalProps> = ({ show, onClose }) => {
       description,
       amount: Number(amount),
       timestamp: new Date().toISOString(),
-      groupId,
+      groupId: Number(groupId),
     };
 
     // Add new expense to the global state

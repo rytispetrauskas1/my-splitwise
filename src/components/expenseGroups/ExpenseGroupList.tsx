@@ -1,6 +1,7 @@
 import React from "react";
 import "./ExpenseGroupList.css";
 import { useGlobalState } from "../../context/globalState";
+import { Link } from "react-router-dom";
 
 interface ExpenseGroupListProps {}
 
@@ -16,10 +17,14 @@ const ExpenseGroupList: React.FC<ExpenseGroupListProps> = () => {
       <h2>Your Groups</h2>
       {groups.length > 0 ? (
         groups.map((group, index) => (
-          <div key={index} className="group-expense-item ">
+          <Link
+            key={group.id}
+            to={`/group/${group.id}`}
+            className="group-expense-item"
+          >
             <h2>{group.name}</h2>
             <h3>Total expenses: {totalAmount}</h3>
-          </div>
+          </Link>
         ))
       ) : (
         <p>No groups available. Please add a new group.</p>
