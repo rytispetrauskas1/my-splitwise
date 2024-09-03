@@ -1,10 +1,10 @@
 import React from "react";
-import "./GroupExpenseList.css";
+import "./ExpenseGroupList.css";
 import { useGlobalState } from "../../context/globalState";
 
-interface GroupExpenseListProps {}
+interface ExpenseGroupListProps {}
 
-const GroupExpenseList: React.FC<GroupExpenseListProps> = () => {
+const ExpenseGroupList: React.FC<ExpenseGroupListProps> = () => {
   const { groups, expenses } = useGlobalState().state;
   const totalAmount = expenses.reduce(
     (expenseSum, expense) => expenseSum + expense.amount,
@@ -28,4 +28,4 @@ const GroupExpenseList: React.FC<GroupExpenseListProps> = () => {
   );
 };
 
-export default GroupExpenseList;
+export default ExpenseGroupList;

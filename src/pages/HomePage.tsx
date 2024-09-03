@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./HomePage.css";
-import GroupExpenseList from "../components/expenseGroups/GroupExpenseList";
+import ExpenseGroupList from "../components/expenseGroups/ExpenseGroupList";
 import AddExpenseGroupModal from "../components/expenseGroups/AddExpenseGroupModal";
 import AddExpenseModal from "../components/expenses/AddExpenseModal";
 
@@ -40,7 +40,7 @@ const HomePage: React.FC<HomePageProps> = () => {
         show={showAddExpenseModal}
         onClose={() => setShowAddExpenseModal(false)}
       />
-      <GroupExpenseList />
+      <ExpenseGroupList />
       <button
         className="floating-add-expense-btn"
         onClick={() => setShowAddExpenseModal(true)}
