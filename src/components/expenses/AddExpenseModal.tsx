@@ -2,29 +2,43 @@ import React, { useState } from "react";
 import "./AddExpenseModal.css";
 import { useGlobalState } from "../../context/globalState";
 import { getMaxValue } from "../../utils/listUtils";
+import { Expense } from "types";
 
 interface AddExpenseModalProps {
   show: boolean;
   onClose: () => void;
   currentGroupId?: number | string;
+  expense?: Expense;
 }
 
 const AddExpenseModal: React.FC<AddExpenseModalProps> = ({
   show,
   onClose,
   currentGroupId = "",
+  expense = null,
 }) => {
   const { state, dispatch } = useGlobalState();
   const { expenses, groups, categories, currentUser } = state;
 
-  const [expenseType, setExpenseType] = useState<string>("");
-  const [description, setDescription] = useState<string>("");
-  const [amount, setAmount] = useState<number | string>("");
+  const [expenseType, setExpenseType] = useState<string>(expense ? expense.type : "");
+  const [description, setDescription] = useState<string>(expense ? expense.description : "");
+  const [amount, setAmount] = useState<number | string>(expense ? expense.amount : "");
   const [groupId, setGroupId] = useState<number | string>(currentGroupId);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-
+    if (expense) {
+      const newExpense = {
+        id: expense.id,
+        type: expenseType,
+        description,
+        amount: Number(amount),
+        timestamp: expense.timestamp,
+        groupId: Number(groupId),
+        userId: currentUser ? currentUser.id : 0,
+      };
+      dispatch({ type: "UPDATE_EXPENSE", payload: newExpense });
+    }
     // Create expense Id map
     const expenseMap = expenses.map((item) => {
       return {
@@ -119,13 +133,9 @@ const AddExpenseModal: React.FC<AddExpenseModalProps> = ({
           </div>
           <div className="expense-form-buttons">
             <button type="submit" className="expense-submit-btn">
-              Add Expense
+              {expense ? "Edit Expense" : "Add Expense"}
             </button>
-            <button
-              type="button"
-              className="expense-cancel-btn"
-              onClick={onClose}
-            >
+            <button type="button" className="expense-cancel-btn" onClick={onClose}>
               Cancel
             </button>
           </div>
