@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import "./AddExpenseModal.css";
 import { useGlobalState } from "../../context/globalState";
 import { getMaxValue } from "../../utils/listUtils";
@@ -17,6 +17,7 @@ const AddExpenseModal: React.FC<AddExpenseModalProps> = ({
   currentGroupId = "",
   expense = null,
 }) => {
+  const modalRef = useRef<HTMLDivElement>(null);
   const { state, dispatch } = useGlobalState();
   const { expenses, groups, categories, currentUser } = state;
 
@@ -25,9 +26,20 @@ const AddExpenseModal: React.FC<AddExpenseModalProps> = ({
   const [amount, setAmount] = useState<number | string>(expense ? expense.amount : "");
   const [groupId, setGroupId] = useState<number | string>(currentGroupId);
 
+  const handleBackgroundClick = (e: React.MouseEvent) => {
+    console.log("ASDASd");
+
+    // If the click is on the background (outside the modal content), close the modal
+    if (modalRef.current && !modalRef.current.contains(e.target as Node)) {
+      onClose();
+    }
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+
     if (expense) {
+      // If expense is provided in the props, update the existing expense
       const newExpense = {
         id: expense.id,
         type: expenseType,
@@ -37,34 +49,42 @@ const AddExpenseModal: React.FC<AddExpenseModalProps> = ({
         groupId: Number(groupId),
         userId: currentUser ? currentUser.id : 0,
       };
+
+      // Update expense to the global state
       dispatch({ type: "UPDATE_EXPENSE", payload: newExpense });
-    }
-    // Create expense Id map
-    const expenseMap = expenses.map((item) => {
-      return {
-        id: item.id,
+    } else {
+      console.log("SADsa");
+
+      // If expense is not provided in the props, create a new expense
+      // Create expense Id map
+      const expenseMap = expenses.map((item) => {
+        return {
+          id: item.id,
+        };
+      });
+
+      const newExpense = {
+        id: getMaxValue(expenseMap),
+        type: expenseType,
+        description,
+        amount: Number(amount),
+        timestamp: new Date().toISOString(),
+        groupId: Number(groupId),
+        userId: currentUser ? currentUser.id : 0,
       };
-    });
 
-    // Create a new expense object
-    const newExpense = {
-      id: getMaxValue(expenseMap),
-      type: expenseType,
-      description,
-      amount: Number(amount),
-      timestamp: new Date().toISOString(),
-      groupId: Number(groupId),
-      userId: currentUser ? currentUser.id : 0,
-    };
-
-    // Add new expense to the global state
-    dispatch({ type: "ADD_EXPENSE", payload: newExpense });
+      // Add new expense to the global state
+      dispatch({ type: "ADD_EXPENSE", payload: newExpense });
+    }
 
     // Clean up local state
     setExpenseType("");
     setDescription("");
     setAmount("");
-    setGroupId("");
+    if (!groupId) {
+      setGroupId("");
+    }
+
     onClose();
   };
 
@@ -73,8 +93,8 @@ const AddExpenseModal: React.FC<AddExpenseModalProps> = ({
   }
 
   return (
-    <div className="expense-modal-overlay">
-      <div className="expense-modal-content">
+    <div className="expense-modal-overlay" onClick={handleBackgroundClick}>
+      <div className="expense-modal-content" ref={modalRef}>
         <h2>Add New Expense</h2>
         <form onSubmit={handleSubmit} className="expense-form">
           <div className="expense-form-group">

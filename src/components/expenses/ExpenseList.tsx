@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import "./ExpenseList.css";
 import { Expense } from "../../types";
-import EditIcon from "../../assets/icons/edit.svg";
 import AddExpenseModal from "./AddExpenseModal";
 import { useParams } from "react-router-dom";
+import EditButton from "components/common/EditButton";
 
 interface ExpenseListProps {
   expenses: Expense[];
@@ -27,12 +27,8 @@ const ExpenseList: React.FC<ExpenseListProps> = ({ expenses }) => {
             <strong>Amount:</strong> €{expense.amount.toFixed(2)} <br />
             <strong>Date Added:</strong> {new Date(expense.timestamp).toLocaleString()}{" "}
           </div>
-
-          <img
-            src={EditIcon}
-            alt="Edit icon"
-            className="edit-icon"
-            onClick={() => {
+          <EditButton
+            onEditClick={() => {
               onEditClick(expense);
             }}
           />

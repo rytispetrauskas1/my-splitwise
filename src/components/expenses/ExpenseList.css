@@ -29,15 +29,3 @@
   .expense-item p {
     margin: 5px 0;
   }
-  
-  .edit-icon {
-    background-color: rgba(0, 0, 0, 0.1);
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-
-  .edit-icon:hover {
-    background-color: #0d7a55;
-}
