@@ -14,6 +14,7 @@ type GlobalState = {
   expenses: Expense[];
   categories: Category[];
   currentUser: User | null;
+  users: User[];
 };
 
 type Action =
@@ -22,6 +23,7 @@ type Action =
   | { type: "ADD_EXPENSE"; payload: Expense }
   | { type: "UPDATE_EXPENSE"; payload: Expense }
   | { type: "SET_CURRENT_USER"; payload: User }
+  | { type: "SET_USERS"; payload: User[] }
   | { type: "ADD_CATEGORY"; payload: Category };
 
 const loadStateFromLocalStorage = (): GlobalState => {
@@ -29,12 +31,14 @@ const loadStateFromLocalStorage = (): GlobalState => {
   const storedExpenses = localStorage.getItem("expenses");
   const storedCategories = localStorage.getItem("categories");
   const storedCurrentUser = localStorage.getItem("currentUser");
+  const storedUsers = localStorage.getItem("users");
 
   return {
     groups: storedGroups ? JSON.parse(storedGroups) : [],
     expenses: storedExpenses ? JSON.parse(storedExpenses) : [],
     categories: storedCategories ? JSON.parse(storedCategories) : defaultCategories,
     currentUser: storedCurrentUser ? JSON.parse(storedCurrentUser) : null,
+    users: storedUsers ? JSON.parse(storedUsers) : [],
   };
 };
 
@@ -83,6 +87,9 @@ const globalReducer = (state: GlobalState, action: Action): GlobalState => {
     case "SET_CURRENT_USER":
       localStorage.setItem("currentUser", JSON.stringify(action.payload));
       return { ...state, currentUser: action.payload };
+    case "SET_USERS":
+      localStorage.setItem("users", JSON.stringify(action.payload));
+      return { ...state, users: action.payload };
     default:
       return state;
   }

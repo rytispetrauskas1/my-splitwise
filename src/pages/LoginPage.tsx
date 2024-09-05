@@ -41,6 +41,10 @@ const LoginPage: React.FC = () => {
     const user = checkLoginCreds();
     if (user) {
       dispatch({
+        type: "SET_USERS",
+        payload: defaultUsers,
+      });
+      dispatch({
         type: "SET_CURRENT_USER",
         payload: { id: user.id, username: loginUsername },
       });
