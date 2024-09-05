@@ -1,0 +1,13 @@
+.member-button {
+  background-color: #f88d01;
+  color: white;
+  padding: 10px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.member-button:hover {
+  background-color: #d17104;
+}

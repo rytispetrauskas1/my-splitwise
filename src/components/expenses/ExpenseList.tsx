@@ -3,7 +3,7 @@ import "./ExpenseList.css";
 import { Expense } from "../../types";
 import AddExpenseModal from "./AddExpenseModal";
 import { useParams } from "react-router-dom";
-import EditButton from "components/common/EditButton";
+import EditButton from "components/common/buttons/EditButton";
 
 interface ExpenseListProps {
   expenses: Expense[];

@@ -3,9 +3,9 @@ import { useGlobalState } from "../context/globalState";
 import { useParams } from "react-router-dom";
 import "./ExpenseGroup.css";
 import ExpenseList from "../components/expenses/ExpenseList";
-import AddExpenseButton from "../components/common/AddExpenseButton";
+import AddExpenseButton from "../components/common/buttons/AddExpenseButton";
 import AddExpenseModal from "../components/expenses/AddExpenseModal";
-import GroupMembersButton from "components/common/GroupMembersButton";
+import GroupMembersButton from "components/common/buttons/GroupMembersButton";
 
 const GroupExpenses: React.FC = () => {
   const { groupId } = useParams<{ groupId: string }>();
@@ -21,13 +21,10 @@ const GroupExpenses: React.FC = () => {
     );
 
   const calculateExpenses = () => {
-    const userExpense = 0;
-    groupExpenses.forEach((groupExpense) => {});
     return 15;
   };
 
   const userExpenses = calculateExpenses();
-
   if (!group) {
     return <div>Group not found</div>;
   }

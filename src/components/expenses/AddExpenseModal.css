@@ -49,33 +49,3 @@
   justify-content: space-between;
   margin-top: 15px;
 }
-
-.expense-submit-btn {
-  background-color: #4CAF50;
-  color: white;
-  padding: 10px;
-  font-size: 16px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  margin-top: 10px;
-}
-
-.expense-submit-btn:hover {
-  background-color: #45a049;
-}
-
-.expense-cancel-btn {
-  background-color: #f44336;
-  color: white;
-  padding: 10px;
-  font-size: 16px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  margin-top: 10px;
-}
-
-.expense-cancel-btn:hover {
-  background-color: #d32f2f;
-}

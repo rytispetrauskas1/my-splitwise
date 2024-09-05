@@ -3,6 +3,8 @@ import "./AddExpenseModal.css";
 import { useGlobalState } from "../../context/globalState";
 import { getMaxValue } from "../../utils/listUtils";
 import { Expense } from "types";
+import CancelButton from "components/common/buttons/CancelButton";
+import SubmitButton from "components/common/buttons/SubmitButton";
 
 interface AddExpenseModalProps {
   show: boolean;
@@ -148,12 +150,8 @@ const AddExpenseModal: React.FC<AddExpenseModalProps> = ({
             </select>
           </div>
           <div className="expense-form-buttons">
-            <button type="submit" className="expense-submit-btn">
-              {expense ? "Edit Expense" : "Add Expense"}
-            </button>
-            <button type="button" className="expense-cancel-btn" onClick={onClose}>
-              Cancel
-            </button>
+            <SubmitButton buttonText={expense ? "Edit Expense" : "Add Expense"} />
+            <CancelButton onClick={onClose} />
           </div>
         </form>
       </div>

@@ -1,6 +1,6 @@
 import React from "react";
 import "./EditButton.css";
-import EditIcon from "../../assets/icons/edit.svg";
+import EditIcon from "../../../assets/icons/edit.svg";
 
 interface EditButtonProps {
   onEditClick: () => void;

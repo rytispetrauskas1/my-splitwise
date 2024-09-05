@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./ExpenseGroupList.css";
 import { useGlobalState } from "../../context/globalState";
 import { Link } from "react-router-dom";
-import EditButton from "components/common/EditButton";
+import EditButton from "components/common/buttons/EditButton";
 import { Group } from "types";
 import AddExpenseGroupModal from "./AddExpenseGroupModal";
 
