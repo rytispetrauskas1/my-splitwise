@@ -11,14 +11,13 @@
   }
   
   .expense-item {
-    background-color: hsl(0, 0%, 98%);
     padding: 15px;
     margin-bottom: 15px;
     border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 4px rgba(252, 248, 248, 0.1);
     justify-content: space-between; /* Pushes the edit button to the right */
     display: flex;
-    width: 60%;
+    width: 100%;
   }
   
   .expense-item h3 {

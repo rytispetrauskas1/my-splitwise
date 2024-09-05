@@ -5,6 +5,7 @@ import "./ExpenseGroup.css";
 import ExpenseList from "../components/expenses/ExpenseList";
 import AddExpenseButton from "../components/common/AddExpenseButton";
 import AddExpenseModal from "../components/expenses/AddExpenseModal";
+import GroupMembersButton from "components/common/GroupMembersButton";
 
 const GroupExpenses: React.FC = () => {
   const { groupId } = useParams<{ groupId: string }>();
@@ -19,13 +20,27 @@ const GroupExpenses: React.FC = () => {
         new Date(expenseB.timestamp).getTime() - new Date(expenseA.timestamp).getTime()
     );
 
+  const calculateExpenses = () => {
+    const userExpense = 0;
+    groupExpenses.forEach((groupExpense) => {});
+    return 15;
+  };
+
+  const userExpenses = calculateExpenses();
+
   if (!group) {
     return <div>Group not found</div>;
   }
 
   return (
     <div className="group-expense-container">
-      <h1 className="group-title">{group.name}</h1>
+      <div className="group-expense-header">
+        <h1 className="group-title">{group.name}</h1>
+        <GroupMembersButton onEditClick={() => {}} />
+      </div>
+      <h2 className={`expense-amount ${userExpenses < 0 ? "negative" : "positive"}`}>
+        {userExpenses > 0 ? "You are owed" : "You owe"} {userExpenses}
+      </h2>
       <ExpenseList expenses={groupExpenses} />
       <AddExpenseModal
         show={showAddExpenseModal}

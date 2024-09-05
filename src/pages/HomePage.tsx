@@ -9,8 +9,7 @@ import AddExpenseButton from "../components/common/AddExpenseButton";
 interface HomePageProps {}
 
 const HomePage: React.FC<HomePageProps> = () => {
-  const [showAddExpenseModal, setShowAddExpenseModal] =
-    useState<boolean>(false);
+  const [showAddExpenseModal, setShowAddExpenseModal] = useState<boolean>(false);
   const [showAddGroupModal, setShowAddGroupModal] = useState<boolean>(false);
   const navigate = useNavigate();
 
@@ -21,26 +20,12 @@ const HomePage: React.FC<HomePageProps> = () => {
   return (
     <div className="homepage">
       <header className="homepage-header">
-        <h1>Welcome to Splitwise Clone</h1>
-        <p>Manage your expenses easily between two people.</p>
-        <button
-          className="open-group-btn"
-          onClick={() => setShowAddGroupModal(true)}
-        >
+        <button className="open-group-btn" onClick={() => setShowAddGroupModal(true)}>
           Add Group
         </button>
-        <button className="summary-btn" onClick={handleNavigateToSummary}>
-          View Summary
-        </button>
       </header>
-      <AddExpenseGroupModal
-        show={showAddGroupModal}
-        onClose={() => setShowAddGroupModal(false)}
-      />
-      <AddExpenseModal
-        show={showAddExpenseModal}
-        onClose={() => setShowAddExpenseModal(false)}
-      />
+      <AddExpenseGroupModal show={showAddGroupModal} onClose={() => setShowAddGroupModal(false)} />
+      <AddExpenseModal show={showAddExpenseModal} onClose={() => setShowAddExpenseModal(false)} />
       <AddExpenseButton onClick={() => setShowAddExpenseModal(true)} />
       <ExpenseGroupList />
     </div>

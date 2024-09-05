@@ -36,6 +36,7 @@ const AddExpenseGroupModal: React.FC<AddExpenseGroupModalProps> = ({
         id: group.id,
         name: groupName.trim(),
         timestamp: group.timestamp,
+        users: group.users,
       };
       dispatch({ type: "UPDATE_GROUP", payload: newGroup });
     } else {
@@ -49,6 +50,7 @@ const AddExpenseGroupModal: React.FC<AddExpenseGroupModalProps> = ({
         id: getMaxValue(groupMap),
         name: groupName.trim(),
         timestamp: new Date().toISOString(),
+        users: [],
       };
       dispatch({ type: "ADD_GROUP", payload: newGroup });
     }

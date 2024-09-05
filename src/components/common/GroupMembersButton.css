@@ -1,0 +1,16 @@
+.member-icon {
+  background-color: #f88d01;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 10px;
+    position: relative;
+    width: 2rem;
+    height: 2rem;
+}
+
+.member-icon:hover {
+  background-color: #d17104;
+}

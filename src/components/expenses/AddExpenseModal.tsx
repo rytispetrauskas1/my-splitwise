@@ -27,8 +27,6 @@ const AddExpenseModal: React.FC<AddExpenseModalProps> = ({
   const [groupId, setGroupId] = useState<number | string>(currentGroupId);
 
   const handleBackgroundClick = (e: React.MouseEvent) => {
-    console.log("ASDASd");
-
     // If the click is on the background (outside the modal content), close the modal
     if (modalRef.current && !modalRef.current.contains(e.target as Node)) {
       onClose();
@@ -53,8 +51,6 @@ const AddExpenseModal: React.FC<AddExpenseModalProps> = ({
       // Update expense to the global state
       dispatch({ type: "UPDATE_EXPENSE", payload: newExpense });
     } else {
-      console.log("SADsa");
-
       // If expense is not provided in the props, create a new expense
       // Create expense Id map
       const expenseMap = expenses.map((item) => {

@@ -2,17 +2,36 @@
 
 .group-expense-container {
     padding: 20px;
-    max-width: 800px;
+    /* max-width: 800px; */
     margin: 0 auto;
-    background-color: #f0fff4;
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     font-family: 'Arial', sans-serif;
 }
-
+.group-expense-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
 .group-title {
-    color: #0f9e6c;
+    color: #ffffff;
     font-size: 2rem;
-    text-align: center;
+    text-align: left;
     margin-bottom: 20px;
+}
+
+.expense-amount {
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin: 5px 0;
+}
+
+/* Apply red color if amount is negative */
+.negative {
+    color: red;
+}
+
+/* Apply green color if amount is positive or zero */
+.positive {
+    color: green;
 }

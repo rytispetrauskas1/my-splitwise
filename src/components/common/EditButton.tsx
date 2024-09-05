@@ -12,8 +12,7 @@ const EditButton: React.FC<EditButtonProps> = ({ onEditClick }) => {
       src={EditIcon}
       alt="Edit icon"
       className="edit-icon"
-      onClick={(e) => {
-        e.stopPropagation();
+      onClick={() => {
         onEditClick();
       }}
     />

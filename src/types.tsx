@@ -6,12 +6,19 @@ export type Expense = {
   timestamp: string;
   groupId: number;
   userId: number;
+  // split: Split[];
 };
+
+// export type Split = {
+//   userId: number;
+//   portion: number;
+// };
 
 export type Group = {
   id: number;
   name: string;
   timestamp: string;
+  users: number[];
 };
 
 export type Category = {
@@ -19,8 +26,6 @@ export type Category = {
   name: string;
   timestamp: string;
 };
-
-// src/types/User.ts
 
 export type User = {
   id: number;
