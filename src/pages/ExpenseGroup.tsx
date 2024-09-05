@@ -33,7 +33,7 @@ const GroupExpenses: React.FC = () => {
     <div className="group-expense-container">
       <div className="group-expense-header">
         <h1 className="group-title">{group.name}</h1>
-        <GroupMembersButton onEditClick={() => {}} />
+        <GroupMembersButton onClick={() => {}} />
       </div>
       <h2 className={`expense-amount ${userExpenses < 0 ? "negative" : "positive"}`}>
         {userExpenses > 0 ? "You are owed" : "You owe"} {userExpenses}

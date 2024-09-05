@@ -3,7 +3,7 @@ import "./AddExpenseGroupModal.css";
 import { useGlobalState } from "../../context/globalState";
 import { getMaxValue } from "../../utils/listUtils";
 import { Group } from "types";
-import AddMember from "./AddMemberView";
+import AddMember from "../groupMember/AddMemberView";
 import AddMemberButton from "components/common/buttons/AddMemberButton";
 import CancelButton from "components/common/buttons/CancelButton";
 import SubmitButton from "components/common/buttons/SubmitButton";

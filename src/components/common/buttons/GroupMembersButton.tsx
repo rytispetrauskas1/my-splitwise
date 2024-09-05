@@ -3,17 +3,17 @@ import "./GroupMembersButton.css";
 import MemberIcon from "../../../assets/icons/member.svg";
 
 interface GroupMembersButtonProps {
-  onEditClick: () => void;
+  onClick: () => void;
 }
 
-const GroupMembersButton: React.FC<GroupMembersButtonProps> = ({ onEditClick }) => {
+const GroupMembersButton: React.FC<GroupMembersButtonProps> = ({ onClick }) => {
   return (
     <img
       src={MemberIcon}
       alt="Edit icon"
       className="member-icon"
       onClick={() => {
-        onEditClick();
+        onClick();
       }}
     />
   );
